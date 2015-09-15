@@ -7,7 +7,7 @@ About:
 A model of an online movie rental site. It uses youtube trailers for the representation of movie watching.
 
 
-features:
+Features:
 ---------
 - Windows Forms
 - .Net XML
