@@ -9,7 +9,7 @@ A model of an online movie rental site. It uses youtube trailers for the represe
 
 Used languages:
 ---------------
-- C#
+- Visual C#
 - XML
 
 
