@@ -25,8 +25,8 @@ namespace FilmKolcsonzo
         internal Felhasznalo belepo;
 
         // Fields for functionallity.
-        int kulcs = 0;
-        int kulcs2 = 0;
+        private int kulcs = 0;
+        private int kulcs2 = 0;
         private int getid;
         private int getid2;
         private string box;
@@ -34,7 +34,7 @@ namespace FilmKolcsonzo
         private string box3;
         private string box5;
         private string url;
-        bool seckond = false;
+        private bool seckond = false;
 
         #endregion Fields
 
@@ -47,6 +47,12 @@ namespace FilmKolcsonzo
         {
             InitializeComponent();
         }
+		
+		/// <summary>
+        /// Destroys the instance of the <see cref="FelhasznaloiFeluletForm"/> class.
+        /// </summary>
+        ~FelhasznaloiFeluletForm()
+        { }
 
         #endregion Constructors
 
@@ -204,9 +210,7 @@ namespace FilmKolcsonzo
                 }
             }
             catch (Exception e6)
-            {
-
-            }
+            { }
 
             #endregion CheckLogin
         }
@@ -758,12 +762,56 @@ namespace FilmKolcsonzo
             XDocument doc = XDocument.Load("kolcsonzesek.xml");
             var vannak = doc.Descendants("kolcsonzes");
             var van = from x in vannak
-                          where (string)x.Element("felhasznaloid") == belepo.Idje.ToString() && (int)x.Element("filmid") == getid && (string)x.Element("aktiv") == "true"
+                          where (string)x.Element("felhasznaloid") == belepo.Idje.ToString() && (int)x.Element("filmid") == getid
                           select x;
 
             if (van.Count() > 0)
             {
-                MessageBox.Show("A filmet már kiválasztotta.");
+				// If the movie is in the users list but inactive, than reactivate it.
+				if (((Film)van.Single()).Aktiv == false)
+				{
+					bool meg;
+
+					if (belepo.Fizetesmodja == "havi")
+					{
+						meg = true;
+					}
+					else
+					{
+						meg = false;
+					}
+				
+					van.Single().Element("aktiv").Value = true;
+					van.Single().Element("megtekintes").Value = meg;
+					doc.Save("kolcsonzesek.xml");
+					
+					belepo.Aktivfilmje = int.Parse(belepo.Aktivfilmje.ToString()) + 1;
+
+					if (belepo.Fizetesmodja == "darab")
+					{
+						belepo.Koltsege = int.Parse(belepo.Koltsege.ToString()) + 500;
+						belepo.Befizetve = "false";
+					}
+
+					XDocument doc3 = XDocument.Load("felhasznalok.xml");
+					var q2 = from z in doc3.Root.Descendants("felhasznalo")
+							where (int)z.Attribute("id") == belepo.Idje
+							select z;
+
+					q2.Single().Element("aktivfilm").Value = belepo.Aktivfilmje.ToString();
+					q2.Single().Element("koltseg").Value = belepo.Koltsege.ToString();
+					q2.Single().Element("befizetve").Value = belepo.Befizetve.ToString();
+					doc3.Save("felhasznalok.xml");
+
+					if (belepo.Fizetesmodja == "havi")
+					{
+						Film.TabPages.Add(LejatszoTabPage);
+					}
+				}
+				else
+				{
+					MessageBox.Show("A filmet már kiválasztotta.");
+				}
             }
             // Ha nem, akkor hozzáadjuk a kölcsönzésekhez
             else

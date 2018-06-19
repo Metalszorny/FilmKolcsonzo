@@ -19,7 +19,7 @@ namespace FilmKolcsonzo
         #region Fields
 
         // XML adatok
-        string eleresiut = "felhasznalok.xml";
+        private string eleresiut = "felhasznalok.xml";
 
         #endregion Fields
 
@@ -32,6 +32,12 @@ namespace FilmKolcsonzo
         {
             InitializeComponent();
         }
+		
+		/// <summary>
+        /// Destroys the instance of the <see cref="BejelentkezoForm"/> class.
+        /// </summary>
+        ~BejelentkezoForm()
+        { }
 
         #endregion Constructors
 

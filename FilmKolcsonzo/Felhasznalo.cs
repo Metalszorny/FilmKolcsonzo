@@ -254,6 +254,12 @@ namespace FilmKolcsonzo
             this.koltsege = koltsege;
             this.statusza = statusza;
         }
+		
+		/// <summary>
+        /// Destroys the instance of the <see cref="Felhasznalo"/> class.
+        /// </summary>
+        ~Felhasznalo()
+        { }
 
         #endregion Constructors
 

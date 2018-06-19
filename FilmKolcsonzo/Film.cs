@@ -241,6 +241,12 @@ namespace FilmKolcsonzo
             this.aktiv = aktiv;
             this.bemutatohossza = bemutatohossza;
         }
+		
+		/// <summary>
+        /// Destroys the instance of the <see cref="Film"/> class.
+        /// </summary>
+        ~Film()
+        { }
 
         #endregion Constructors
 

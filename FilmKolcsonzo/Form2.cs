@@ -31,6 +31,12 @@ namespace FilmKolcsonzo
         {
             InitializeComponent();
         }
+		
+		/// <summary>
+        /// Destroys the instance of the <see cref="Form2"/> class.
+        /// </summary>
+        ~Form2()
+        { }
 
         #endregion Constructors
 

@@ -1,5 +1,4 @@
-# FilmKolcsonzo
-===============
+# MovieRentalSystemInVisualCSharp
 
 
 About:
@@ -16,7 +15,7 @@ Used languages:
 Features:
 ---------
 - Windows Forms
-- .Net XML
+- XML handling as database
 - Youtube Connection
 - WCF to get currency info
 

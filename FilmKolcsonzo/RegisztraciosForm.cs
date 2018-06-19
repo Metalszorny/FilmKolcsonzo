@@ -20,10 +20,10 @@ namespace FilmKolcsonzo
         #region Fields
 
         // XML adatok
-        int kulcs = 0;
+        private int kulcs = 0;
 
         // 
-        string eleresiut = "felhasznalok.xml";
+        private string eleresiut = "felhasznalok.xml";
 
         #endregion Fields
 
@@ -33,6 +33,14 @@ namespace FilmKolcsonzo
         /// Initializes a new instance of the <see cref="RegisztraciosForm"/> class.
         /// </summary>
         public RegisztraciosForm()
+        {
+            InitializeComponent();
+        }
+		
+		/// <summary>
+        /// Destroys the instance of the <see cref="RegisztraciosForm"/> class.
+        /// </summary>
+        ~RegisztraciosForm()
         {
             InitializeComponent();
         }
@@ -150,9 +158,9 @@ namespace FilmKolcsonzo
                 int BankSzamEllenorzo = int.Parse(BankTextBox.Text);
 
                 // Checking of some fileds.
-                bool JelszoEllenorzo = JelszoTextBox.Text.Length > 8 && int.Parse(JelszoTextBox.Text) > 0 ? true : false;
-                bool NevEllenorzo = NevTextBox.Text.Split(' ').Count() > 1 ? true : false;
-                bool EmailEllenorzo = EmailTextBox.Text.Split('@').Count() > 1 && EmailTextBox.Text.Split('@')[1].Split('.').Count() > 1 ? true : false;
+                bool JelszoEllenorzo = ((JelszoTextBox.Text.Length > 8 && int.Parse(JelszoTextBox.Text) > 0) ? true : false);
+                bool NevEllenorzo = (NevTextBox.Text.Split(' ').Count() > 1 ? true : false);
+                bool EmailEllenorzo = ((EmailTextBox.Text.Split('@').Count() > 1 && EmailTextBox.Text.Split('@')[1].Split('.').Count() > 1) ? true : false);
 
                 // Egyedi kulcsok ellenőrzése
                 XDocument kereses = XDocument.Load(eleresiut);
